@@ -5,3 +5,5 @@ node_modules
 key.py
 __pycache__
 webpack-stats.json
+config.js
+ytkey.py

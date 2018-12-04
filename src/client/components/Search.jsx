@@ -1,8 +1,11 @@
 import React from 'react';
 
-const Search = ({search}) => {
+const Search = ({ search, submit }) => {
   return (
-    <input onChange={(event) => search(event)} type="text"></input>
+  	<div className="search-bar">
+	    <input onChange={(event) => search(event)} type="text"></input>
+	    <input onClick={() => submit()} type="button" value="Search"></input>
+	  </div>
   )
 }
 
