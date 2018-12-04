@@ -7,3 +7,7 @@ __pycache__
 webpack-stats.json
 config.js
 ytkey.py
+__init__.py
+__init__.pyc
+migrations
+bundle.js

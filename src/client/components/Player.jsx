@@ -1,35 +1,36 @@
 import React from 'react';
 import Search from './Search.jsx';
 import Entries from './Entries.jsx';
+import Video from './Video.jsx';
 import $ from 'jQuery';
 
-class App extends React.Component {
+class Player extends React.Component {
   constructor(props) {
   	super(props);
 
   	this.state = {
-  		search: 'puppy',
+  		search: 'dog',
   		data: [],
-  		playlist: []
+  		playlist: [],
+      current: 0
   	}
 
   	this.handleSearchInput = this.handleSearchInput.bind(this);
   	this.handleSubmit = this.handleSubmit.bind(this);
   	this.handleAdd = this.handleAdd.bind(this);
   	this.handlePlayVideo = this.handlePlayVideo.bind(this);
+    this.handleNextVideo = this.handleNextVideo.bind(this);
+    this.handlePrevVideo = this.handlePrevVideo.bind(this);
   }
 
   componentDidMount() {
-  	const { playlist } = this.state;
   	const cachedHits = sessionStorage.getItem('playlist');
   	
   	if (cachedHits) {
   		this.setState({
   			playlist: JSON.parse(cachedHits)
   		})
-  		console.log()
   	}
-  	this.handleSubmit();
   }
 
   handleSearchInput(e) {
@@ -88,25 +89,37 @@ class App extends React.Component {
     })
   }
 
+  handleNextVideo() {
+    const { current, playlist } = this.state
+
+    if (current < playlist.length - 1) {
+      this.setState(prevState => ({
+        current: prevState.current + 1
+      }));
+    }
+  }
+
+  handlePrevVideo() {
+    const { current, playlist } = this.state
+
+    if (current > 0) {
+      this.setState(prevState => ({
+        current: prevState.current - 1
+      }));
+    }
+  }
+
   render() {
-    const { data } = this.state;
+    const { data, playlist, current } = this.state;
 
   	return (
   	  <div>
-  	    <div className="playlist">
-		  	  <h1>Make a Playlist</h1>
-          <form action="/playvideos" className="createPL">
-            <input type="submit" value="Watch Playlist" />
-          </form>
-          <form action="" className="createPL">
-		  	    <input type="button" value="Create Playlist"  onClick={() => this.handleCreatePlaylist()}/>
-          </form>
-	  	  </div>
-  	    <Search search={this.handleSearchInput} submit={this.handleSubmit} />
+        <Search search={this.handleSearchInput} submit={this.handleSubmit} />
+        <Video playlist={playlist} current={current} next={this.handleNextVideo} prev={this.handlePrevVideo} />
   	    <Entries data={data} add={this.handleAdd} play={this.handlePlayVideo}/>
   	  </div>
   	)
   }
 }
 
-export default App;
+export default Player;
