@@ -1,7 +1,7 @@
 # mvp - youtube playlist creation
 
 ## Table of Contents
-1. [Installation](#dependencies)
+1. [Installation](#install-dependencies)
 2. [Usage](#usage)
 3. [Development](#development)
 
