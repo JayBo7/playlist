@@ -89,8 +89,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'youtube',
-        'USER': 'jaybee',
-        'PASSWORD': '',
+        'USER': 'FILL_ME_IN',
+        'PASSWORD': 'FILL_ME_IN',
         'HOST': 'localhost',
         'PORT': '5432',
     }
